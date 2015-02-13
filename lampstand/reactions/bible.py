@@ -17,13 +17,30 @@ class Reaction(lampstand.reactions.base.Reaction):
     cooldown_number = 3
     cooldown_time = 120
     uses = []
-
+    #List of unique book names in ESV bible ignoring preceding numbers.
+    _bibleBooks = ["Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy",
+                   "Joshua", "Judges", "Ruth", "Samuel", "Kings", "Chronicles",
+                   "Ezra", "Nehemiah", "Esther", "Job", "Psalms", "Proverbs",
+                   "Ecclesiastes", "Song of Solomon", "Isaiah", "Jeremiah",
+                   "Lamentations", "Ezekiel", "Daniel", "Hosea", "Joel", "Amos",
+                   "Obadiah", "Jonah", "Micah", "Nahum", "Habakkuk", "Zephaniah",
+                   "Haggai", "Zechariah", "Malachi", "Matthew", "Mark", "Luke",
+                   "John", "Acts", "Romans", "Corinthians", "Galatians",
+                   "Ephesians", "Philippians", "Colossians", "Thessalonians",
+                   "Timothy", "Titus", "Philemon", "Hebrews", "James", "Peter",
+                   "Jude", "Revelation"]
+    def bookPartRegex():
+        #Generate regex that matches 3 or more characters of any of the books
+        #starting from the front
+        #i.e will match "Joshua" "Joshu" "Josh" "Jos"
+        #As esvbible does not return matches for 1 and 2 length strings
+        pass
     def __init__(self, connection):
         self.channelMatch = re.compile(
-            '%s. (\w*) (\d+\:\S+)' %
-            connection.nickname,
+            '%s. %s (\d+\:\S+)' %
+            (connection.nickname,bookPartRegex()),
             re.IGNORECASE)
-        self.privateMatch = re.compile('(\w*) (\d+\:\S+)')
+        self.privateMatch = re.compile('%s (\d+\:\S+)' % bookPartRegex())
 
     def channelAction(self, connection, user, channel, message):
         matches = self.channelMatch.findall(message)
