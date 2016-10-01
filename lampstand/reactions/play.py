@@ -28,7 +28,7 @@ class Reaction(lampstand.reactions.base.Reaction):
 
         self.channelMatch = (
             re.compile(
-                '%s: wh(at|ich) (game |)should I play\?' %
+                '%s: wh(at|ich) (game |)should I play\??' %
                 connection.nickname,
                 re.IGNORECASE),
             re.compile(
@@ -36,26 +36,26 @@ class Reaction(lampstand.reactions.base.Reaction):
                 connection.nickname,
                 re.IGNORECASE),
             re.compile(
-                '%s: wh(at|ich) steam game should I play\?' %
+                '%s: wh(at|ich) steam game should I play\??' %
                 connection.nickname,
                 re.IGNORECASE),
             re.compile(
-                '%s: wh(at|ich) of my recent steam games should I play\?' %
+                '%s: wh(at|ich) of my recent steam games should I play\??' %
                 connection.nickname,
                 re.IGNORECASE))
 
         self.privateMatch = (
             re.compile(
-                'wh(at|ich) (game | )should I play\?',
+                'wh(at|ich) (game | )should I play\??',
                 re.IGNORECASE),
             re.compile(
                 'my steam profile is (\S*)',
                 re.IGNORECASE),
             re.compile(
-                'wh(at|ich) steam game should I play\?',
+                'wh(at|ich) steam game should I play\??',
                 re.IGNORECASE),
             re.compile(
-                'wh(at|ich) of my recent steam games should I play\?',
+                'wh(at|ich) of my recent steam games should I play\??',
                 re.IGNORECASE))
 
         self.dbconnection = connection.dbconnection
